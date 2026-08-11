@@ -11,6 +11,7 @@ public class LlmClientImpl implements Llmclient {
 
     private final ChatModel geminiChatModel;
     private final ChatModel ollamaChatModel;
+    private final ChatModel grokChatModel;
 
     public LlmClientImpl(
             @Qualifier("gemini") ChatModel geminiChatModel,
@@ -18,7 +19,7 @@ public class LlmClientImpl implements Llmclient {
             @Qualifier("grok")ChatModel grokChatModel   ) {
         this.geminiChatModel=geminiChatModel;
         this.ollamaChatModel=ollamaChatModel;
-
+        this.grokChatModel=grokChatModel;
     }
 
 
@@ -34,7 +35,7 @@ public class LlmClientImpl implements Llmclient {
 
     @Override
     public String grokChat(String message) {
-        return geminiChatModel.chat(message);
+        return grokChatModel.chat(message);
     }
 
 
