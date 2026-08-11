@@ -13,15 +13,18 @@ import java.time.Duration;
 @Configuration
 public class AiModelConfig {
 
-    String geminiApiKey = System.getenv("GEMINI_API_KEY");
+    @Value("${gemini.api.key}")
+    private String geminiApiKey;
+
+    @Value("${groq.api.key}")
+    private String groqApiKey;
 
     @Value("${ollama.base-url:http://localhost:11434}")
     private String ollamaBaseUrl;
 
-    String groqApiKey = System.getenv("GROQ_API_KEY");
 
     @Bean("gemini")
-    public ChatModel geminiChatModel(){
+    public ChatModel geminiChatModel() {
         return GoogleAiGeminiChatModel.builder()
                 .apiKey(geminiApiKey)
                 .modelName("gemini-3.6-flash")
@@ -29,14 +32,13 @@ public class AiModelConfig {
     }
 
     @Bean("ollama")
-    public ChatModel ollamaChatModels(){
+    public ChatModel ollamaChatModels() {
         return OllamaChatModel.builder()
                 .baseUrl(ollamaBaseUrl)
                 .modelName("medgemma:4b")
                 .temperature(0.5)
                 .timeout(Duration.ofSeconds(60))
                 .build();
-
     }
 
     @Bean("grok")
@@ -45,6 +47,5 @@ public class AiModelConfig {
                 .apiKey(groqApiKey)
                 .modelName("grok-3-mini")
                 .build();
-                
     }
 }
