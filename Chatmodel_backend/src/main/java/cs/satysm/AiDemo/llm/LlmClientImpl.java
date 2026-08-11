@@ -33,6 +33,7 @@ public class LlmClientImpl implements Llmclient {
         return ollamaChatModel.chat(message);
     }
 
+    // now working grok
     @Override
     public String grokChat(String message) {
         return grokChatModel.chat(message);
