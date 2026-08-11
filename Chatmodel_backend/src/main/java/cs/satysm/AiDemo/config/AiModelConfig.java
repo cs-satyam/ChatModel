@@ -41,6 +41,7 @@ public class AiModelConfig {
                 .build();
     }
 
+    // grok is not working
     @Bean("grok")
     public ChatModel grokChatModel() {
         return OpenAiChatModel.builder()
